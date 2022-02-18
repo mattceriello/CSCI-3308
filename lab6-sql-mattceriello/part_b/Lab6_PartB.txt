@@ -1,0 +1,135 @@
+Lab #6 Take Home
+Your name: Matt Ceriello
+
+
+---------------------------------------- Question 1 Query ----------------------------------------
+
+QUERY:
+
+CREATE view city_orders as
+	SELECT ship_city, count(*) FROM orders GROUP BY ship_city;
+CREATE view max_city as
+	SELECT MAX(count) FROM city_orders;
+SELECT ship_city FROM city_orders INNER JOIN max_city ON city_orders.count = max_city.max;
+
+
+RESULT:
+
+ship_city
+----------------
+Rio de Janeiro
+(1 row)
+
+---------------------------------------- Question 2 Query ----------------------------------------
+
+QUERY:
+CREATE view orders_to_graz as
+	SELECT * FROM orders WHERE ship_city = 'Graz';
+CREATE view graz_info as
+	SELECT order_details.order_id, product_id, quantity FROM orders_to_graz INNER JOIN order_details ON orders_to_graz.order_id = order_details.order_id;
+CREATE view min_amnt as
+	SELECT MIN(quantity) FROM graz_info;
+CREATE view min_prod as
+		SELECT * FROM graz_info INNER JOIN min_amnt ON graz_info.quantity = min_amnt.min;
+SELECT product_name FROM min_prod INNER JOIN products on min_prod.product_id = products.product_id;
+
+
+RESULT:
+
+product_name
+---------------------
+Sir Rodney's Scones
+(1 row)
+
+
+
+---------------------------------------- Question 3 Query ----------------------------------------
+
+QUERY:
+
+CREATE view order_count as
+	SELECT customer_id, count(*) FROM orders GROUP BY customer_id;
+CREATE view avg_order as
+	SELECT AVG(count) FROM order_count;
+CREATE view above_avg as
+	SELECT customer_id FROM order_count INNER JOIN avg_order ON order_count.count > avg_order.avg;
+SELECT company_name FROM customers INNER JOIN above_avg ON customers.customer_id = above_avg.customer_id;
+
+RESULT:
+
+company_name
+------------------------------
+Around the Horn
+Berglunds snabbköp
+Blondesddsl père et fils
+Bon app'
+Bottom-Dollar Markets
+B's Beverages
+Ernst Handel
+Folk och fä HB
+Frankenversand
+Godos Cocina Típica
+Great Lakes Food Market
+Hanari Carnes
+HILARION-Abastos
+Hungry Owl All-Night Grocers
+Island Trading
+Königlich Essen
+La maison d'Asie
+Lehmanns Marktstand
+LILA-Supermercado
+LINO-Delicateses
+Magazzini Alimentari Riuniti
+Mère Paillarde
+Old World Delicatessen
+Ottilies Käseladen
+Piccolo und mehr
+Queen Cozinha
+QUICK-Stop
+Rattlesnake Canyon Grocery
+Reggiani Caseifici
+Ricardo Adocicados
+Richter Supermarkt
+Save-a-lot Markets
+Suprêmes délices
+Tortuga Restaurante
+Vaffeljernet
+Victuailles en stock
+Die Wandernde Kuh
+Wartian Herkku
+White Clover Markets
+(39 rows)
+
+
+---------------------------------------- Question 4 Query ----------------------------------------
+
+QUERY:
+
+CREATE view category as
+	SELECT category_id, count(*) FROM products GROUP BY category_id;
+SELECT categories.category_name, category.count FROM categories INNER JOIN category ON categories.category_id = category.category_id WHERE count > 10;
+
+RESULT:
+
+category_name | count
+---------------+-------
+Beverages     |    12
+Condiments    |    12
+Confections   |    13
+Seafood       |    12
+(4 rows)
+
+---------------------------------------- Question 5 Query ----------------------------------------
+
+QUERY:
+
+CREATE view max_sold as
+	SELECT MAX(units_on_order) FROM products;
+SELECT product_name FROM products INNER JOIN max_sold ON products.units_on_order = max_sold.max;
+
+RESULT:
+
+product_name
+---------------------------
+Louisiana Hot Spiced Okra
+(1 row)

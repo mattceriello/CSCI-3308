@@ -1,0 +1,93 @@
+1. Matts-MacBook-Pro-2:~ mattceriello$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+b8dfde127a29: Pull complete 
+Digest: sha256:7d91b69e04a9029b99f3585aaaccae2baa80bcf318f4a5d2165a9898cd2dc0a1
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+2. Matts-MacBook-Pro-2:~ mattceriello$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED         STATUS                     PORTS     NAMES
+8280ebd709f9   hello-world   "/hello"   2 minutes ago   Exited (0) 2 minutes ago             quirky_hopper
+
+3. Matts-MacBook-Pro-2:~ mattceriello$ docker rm quirky_hopper
+quirky_hopper
+Matts-MacBook-Pro-2:~ mattceriello$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+4. Matts-MacBook-Pro-2:~ mattceriello$ docker run --rm hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+5. Matts-MacBook-Pro-2:~ mattceriello$ docker run -it ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+35807b77a593: Pull complete 
+Digest: sha256:9d6a8699fb5c9c39cf08a0871bd6219f0400981c570894cd8cbea30d3424a31f
+Status: Downloaded newer image for ubuntu:latest
+root@a6b994bce4c8:/# exit
+exit
+Matts-MacBook-Pro-2:~ mattceriello$ docker run -dt ubuntu bash
+32fe6feb837bb25570c477c3de6fa02bbe694fcf5aff050d4eb1ea125ae7a5de
+Matts-MacBook-Pro-2:~ mattceriello$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+32fe6feb837b   ubuntu    "bash"    8 seconds ago   Up 7 seconds             sad_jepsen
+Matts-MacBook-Pro-2:~ mattceriello$ docker rm sad_jepsen
+Error response from daemon: You cannot remove a running container 32fe6feb837bb25570c477c3de6fa02bbe694fcf5aff050d4eb1ea125ae7a5de. Stop the container before attempting removal or force remove
+Matts-MacBook-Pro-2:~ mattceriello$ docker rm -f sad_jepsen
+sad_jepsen
+Matts-MacBook-Pro-2:~ mattceriello$ docker ps -a
+]CONTAINER ID   IMAGE     COMMAND   CREATED              STATUS                          PORTS     NAMES
+a6b994bce4c8   ubuntu    "bash"    About a minute ago   Exited (0) About a minute ago             funny_solomon
+Matts-MacBook-Pro-2:~ mattceriello$ docker rm
+"docker rm" requires at least 1 argument.
+See 'docker rm --help'.
+
+Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+Remove one or more containers
+Matts-MacBook-Pro-2:~ mattceriello$ docker rm funny_solomon
+funny_solomon
+Matts-MacBook-Pro-2:~ mattceriello$ 
+Matts-MacBook-Pro-2:~ mattceriello$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+Matts-MacBook-Pro-2:~ mattceriello$ 

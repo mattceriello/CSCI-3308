@@ -1,0 +1,27 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.wordcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.button {
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: blue; /* Green */
+  color: white;
+}
+
+
+.oval{
+  border-radius: 50%;
+}
